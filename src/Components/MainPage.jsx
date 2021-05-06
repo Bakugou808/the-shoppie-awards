@@ -12,6 +12,9 @@ const MainPage = () => {
 
   //   create custom hook for search
   // create hook to check and store localStorage for nominee list
+  const handleResultsUpdate = (newResults) => {
+    console.log(newResults);
+  };
 
   const handleAddNominee = (movieData) => {
     console.log(movieData);
