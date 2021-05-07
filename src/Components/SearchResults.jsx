@@ -6,6 +6,7 @@ const SearchResults = (props) => {
   const renderResults = () => {
     console.log(results);
     return results.map((movie, i) => {
+      let show = false;
       return (
         <div key={`${i}${movie.imdbID}`}>
           {/* <img className="poster-img" src={movie.Poster} alt="movie poster" /> */}
