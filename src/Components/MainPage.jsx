@@ -4,6 +4,7 @@ import Nominations from "./Nominations";
 import Search from "./Search";
 import SearchResults from "./SearchResults";
 import { fetchSearchResults } from "../Services/api";
+import Cookies from "universal-cookie";
 
 const MainPage = () => {
   // child props
@@ -11,7 +12,7 @@ const MainPage = () => {
   const [searchResults, setSearchResults] = useState(false);
   const [searchError, setSearchError] = useState("");
   const [nominees, setNominees] = useState([]);
-
+  const cookies = new Cookies();
   useEffect(() => {
     fetchSearchResults(searchParams.replace(/ /gi, "+")).then((json) => {
       if (json.Response === "True") {
@@ -22,6 +23,8 @@ const MainPage = () => {
         setSearchResults(false);
       }
     });
+    setTimeout(checkForNominees, 3000);
+    // return setSearchParams("");
   }, [searchParams]);
 
   //   create custom hook for search
@@ -29,6 +32,13 @@ const MainPage = () => {
   //   const handleResultsUpdate = (newResults) => {
   //     console.log(newResults);
   //   };
+
+  const checkForNominees = () => {
+    debugger;
+    if (JSON.parse(cookies.get("ShoppiesNominees")).length > 0) {
+      setNominees(JSON.parse(cookies.get("ShoppiesNominees")));
+    }
+  };
 
   const checkIfDuplicate = (movieData) => {
     for (let i = 0; i < nominees.length; i++) {
@@ -71,6 +81,7 @@ const MainPage = () => {
         <Nominations
           nominees={nominees}
           handleRemoveNominee={handleRemoveNominee}
+          cookies={cookies}
         />
       </div>
       {/* <ModalBanner /> */}

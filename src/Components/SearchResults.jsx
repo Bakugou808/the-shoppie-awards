@@ -8,7 +8,7 @@ const SearchResults = (props) => {
     return results.map((movie, i) => {
       return (
         <div key={`${i}${movie.imdbID}`}>
-          <img className="poster-img" src={movie.Poster} alt="movie poster" />
+          {/* <img className="poster-img" src={movie.Poster} alt="movie poster" /> */}
           <li>
             "{movie.Title}" - {movie.Year}
           </li>
