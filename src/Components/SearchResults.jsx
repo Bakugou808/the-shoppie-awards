@@ -1,4 +1,5 @@
 import React from "react";
+import MovieCard from "./MovieCard";
 
 const SearchResults = (props) => {
   const { results, handleAddNominee, error, searchParams } = props;
@@ -6,28 +7,20 @@ const SearchResults = (props) => {
   const renderResults = () => {
     console.log(results);
     return results.map((movie, i) => {
-      let show = false;
       return (
-        <div key={`${i}${movie.imdbID}`}>
-          {/* <img className="poster-img" src={movie.Poster} alt="movie poster" /> */}
-          <li>
-            "{movie.Title}" - {movie.Year}
-          </li>
-          <button
-            className="button is-primary"
-            onClick={() => handleAddNominee(movie)}
-          >
-            Nominate!
-          </button>
-        </div>
+        <MovieCard
+          key={`${i}${movie.imdbID}`}
+          handleClick={handleAddNominee}
+          movieData={movie}
+        />
       );
     });
   };
 
   return (
-    <div>
-      {results && <p>Results for "{searchParams}"</p>}
-      <div>
+    <div id="results-container">
+      {results && <p className="title is-4">Results for "{searchParams}"</p>}
+      <div id="results-section">
         {results && renderResults()}
         {error && <h2>{error}</h2>}
       </div>

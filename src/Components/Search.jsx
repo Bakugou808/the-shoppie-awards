@@ -17,7 +17,7 @@ const Search = (props) => {
           className="input is-link"
           onChange={handleOnChange}
           type="text"
-          placeholder="Link input"
+          placeholder="Search"
           value={searchParams}
         />
       </div>

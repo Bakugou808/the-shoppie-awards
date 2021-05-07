@@ -6,7 +6,6 @@ import SearchResults from "./SearchResults";
 import { fetchSearchResults } from "../Services/api";
 
 const MainPage = () => {
-  // child props
   const [searchParams, setSearchParams] = useState("");
   const [searchResults, setSearchResults] = useState(false);
   const [searchError, setSearchError] = useState("");
@@ -19,7 +18,11 @@ const MainPage = () => {
         setSearchResults(json.Search);
         setSearchError(null);
       } else if (json.Error) {
-        setSearchError(json.Error);
+        if (json.Error === "Incorrect IMDb ID.") {
+          setSearchError("Search to see results!");
+        } else {
+          setSearchError(json.Error);
+        }
         setSearchResults(false);
       }
     });
@@ -41,12 +44,13 @@ const MainPage = () => {
   };
 
   const handleAddNominee = (movieData) => {
-    if (checkIfDuplicate(movieData) && nominees.length < 5)
+    if (checkIfDuplicate(movieData) && nominees.length < 5) {
       localStorage.setItem(
         "ShoppiesNominees",
         JSON.stringify([...nominees, movieData])
       );
-    setNominees((prev) => [...prev, movieData]);
+      setNominees((prev) => [...prev, movieData]);
+    }
   };
 
   const handleRemoveNominee = (movieId) => {
@@ -57,6 +61,7 @@ const MainPage = () => {
       }
     }
     setNominees(newArr);
+    localStorage.setItem("ShoppiesNominees", JSON.stringify(newArr));
   };
 
   return (
@@ -66,18 +71,18 @@ const MainPage = () => {
       </h1>
       <div id="main-page-layout">
         <Search searchParams={searchParams} setSearchParams={setSearchParams} />
+        <Nominations
+          nominees={nominees}
+          handleRemoveNominee={handleRemoveNominee}
+        />
         <SearchResults
           results={searchResults}
           handleAddNominee={handleAddNominee}
           error={searchError}
           searchParams={searchParams}
         />
-        <Nominations
-          nominees={nominees}
-          handleRemoveNominee={handleRemoveNominee}
-        />
       </div>
-      {/* <ModalBanner /> */}
+      {bannerOn && <ModalBanner />}
     </div>
   );
 };

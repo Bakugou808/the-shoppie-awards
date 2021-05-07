@@ -36,3 +36,52 @@
     transform: rotate(360deg);
   }
 }
+
+/* My CSS */
+
+.movie-poster {
+  width: fit-content;
+  height: auto;
+}
+
+.poster-container {
+  width: 100px;
+}
+
+.card-width {
+  width: min-content;
+  margin: 9px;
+}
+
+#results-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#results-container {
+  background-color: powderblue;
+  padding: 20px;
+}
+
+#nominations-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-evenly;
+  margin-top: 45px;
+}
+
+#nominations-cont {
+  background-color: orange;
+  padding: 30px;
+}
+
+#main-page-layout {
+  display: grid;
+  gap: 30px;
+}
+
+.pointer {
+  cursor: pointer;
+}

@@ -1,34 +1,36 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
+import MovieCard from "./MovieCard";
 
 const Nominations = ({ nominees, handleRemoveNominee }) => {
-  useEffect(() => {
-    // console.log("localStorage", nominees);
-    // localStorage.setItem("ShoppiesNominees", JSON.stringify(nominees));
-    // localStorage.setItem("ShoppiesNomineesNames", JSON.stringify(nomineeNames));
-    // localStorage.setItem("testingLocal", JSON.stringify({ ...nominees }));
-    // return addToCookie();
-    // return localStorage.setItem("ShoppiesNominees", JSON.stringify(nominees));
-  }, [nominees]);
+  const [toggle, setToggle] = useState(true);
 
-  //   const cookies = new Cookies()
+  const toggleNominees = () => {
+    setToggle(!toggle);
+  };
 
   const renderNominees = () => {
     return nominees.map((nominee) => {
       return (
         <div>
-          <li>Nominated: {nominee.Title}</li>
-          <button
-            className="button is-primary"
-            onClick={() => handleRemoveNominee(nominee)}
-          >
-            Remove Nomination.
-          </button>
+          <p>Nominated</p>
+          <MovieCard handleClick={handleRemoveNominee} movieData={nominee} />
         </div>
       );
     });
   };
 
-  return <div>{nominees && renderNominees()}</div>;
+  return (
+    <div id="nominations-cont">
+      <h2 className="title is-3">Nominees</h2>
+      <p className="subtitle is-6 pointer" onClick={toggleNominees}>
+        (click to hide nominees)
+      </p>
+
+      {toggle && (
+        <div id="nominations-section">{nominees && renderNominees()}</div>
+      )}
+    </div>
+  );
 };
 
 export default Nominations;
