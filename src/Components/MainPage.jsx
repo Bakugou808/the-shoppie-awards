@@ -3,25 +3,56 @@ import ModalBanner from "./ModalBanner";
 import Nominations from "./Nominations";
 import Search from "./Search";
 import SearchResults from "./SearchResults";
+import { fetchSearchResults } from "../Services/api";
 
 const MainPage = () => {
   // child props
   const [searchParams, setSearchParams] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState(false);
+  const [searchError, setSearchError] = useState("");
   const [nominees, setNominees] = useState([]);
+
+  useEffect(() => {
+    fetchSearchResults(searchParams.replace(/ /gi, "+")).then((json) => {
+      if (json.Response === "True") {
+        setSearchResults(json.Search);
+        setSearchError(null);
+      } else if (json.Error) {
+        setSearchError(json.Error);
+        setSearchResults(false);
+      }
+    });
+  }, [searchParams]);
 
   //   create custom hook for search
   // create hook to check and store localStorage for nominee list
-  const handleResultsUpdate = (newResults) => {
-    console.log(newResults);
+  //   const handleResultsUpdate = (newResults) => {
+  //     console.log(newResults);
+  //   };
+
+  const checkIfDuplicate = (movieData) => {
+    for (let i = 0; i < nominees.length; i++) {
+      let obj = nominees[i];
+      if (obj.imdbID === movieData.imdbID) return false;
+    }
+    return true;
   };
 
   const handleAddNominee = (movieData) => {
     console.log(movieData);
+    if (checkIfDuplicate(movieData) && nominees.length < 5)
+      setNominees((prev) => [...prev, movieData]);
   };
 
   const handleRemoveNominee = (movieId) => {
     console.log(movieId);
+    let newArr = [];
+    for (let nominee of nominees) {
+      if (nominee.imdbID != movieId.imdbID) {
+        newArr.push(nominee);
+      }
+    }
+    setNominees(newArr);
   };
 
   return (
@@ -34,6 +65,8 @@ const MainPage = () => {
         <SearchResults
           results={searchResults}
           handleAddNominee={handleAddNominee}
+          error={searchError}
+          searchParams={searchParams}
         />
         <Nominations
           nominees={nominees}
