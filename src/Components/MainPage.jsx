@@ -77,10 +77,12 @@ const MainPage = () => {
 
       <div id="main-page-layout">
         <Search searchParams={searchParams} setSearchParams={setSearchParams} />
-        <Nominations
-          nominees={nominees}
-          handleRemoveNominee={handleRemoveNominee}
-        />
+        {nominees.length > 0 && (
+          <Nominations
+            nominees={nominees}
+            handleRemoveNominee={handleRemoveNominee}
+          />
+        )}
         <SearchResults
           results={searchResults}
           handleAddNominee={handleAddNominee}
