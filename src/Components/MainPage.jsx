@@ -26,7 +26,7 @@ const MainPage = () => {
         setSearchResults(false);
       }
     });
-    checkForNominees();
+    localStorage.getItem("ShoppiesNominees") && checkForNominees();
   }, [searchParams]);
 
   const checkForNominees = () => {
