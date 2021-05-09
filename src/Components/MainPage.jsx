@@ -65,7 +65,7 @@ const MainPage = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container margin-30px">
       <h1 id="main-page-title" className="title">
         The Shoppies
       </h1>
