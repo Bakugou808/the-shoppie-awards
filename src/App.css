@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .App-logo {
@@ -53,10 +56,18 @@
   margin: 9px;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
+.margin-30px {
+  margin: 30px;
+}
+
 #results-section {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 #results-container {
@@ -82,10 +93,8 @@
   gap: 30px;
 }
 
-.pointer {
-  cursor: pointer;
-}
-
-.margin-30px {
-  margin: 30px;
+#banner {
+  font-size: 30px;
+  background: aliceblue;
+  margin-bottom: 15px;
 }

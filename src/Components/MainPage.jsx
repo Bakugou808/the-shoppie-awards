@@ -29,6 +29,10 @@ const MainPage = () => {
     localStorage.getItem("ShoppiesNominees") && checkForNominees();
   }, [searchParams]);
 
+  useEffect(() => {
+    nominees.length > 4 ? setBannerOn(true) : setBannerOn(false);
+  }, [nominees]);
+
   const checkForNominees = () => {
     if (JSON.parse(localStorage.getItem("ShoppiesNominees")).length > 0) {
       setNominees(JSON.parse(localStorage.getItem("ShoppiesNominees")));
@@ -69,6 +73,8 @@ const MainPage = () => {
       <h1 id="main-page-title" className="title">
         The Shoppies
       </h1>
+      {bannerOn && <ModalBanner />}
+
       <div id="main-page-layout">
         <Search searchParams={searchParams} setSearchParams={setSearchParams} />
         <Nominations
@@ -82,7 +88,6 @@ const MainPage = () => {
           searchParams={searchParams}
         />
       </div>
-      {bannerOn && <ModalBanner />}
     </div>
   );
 };
