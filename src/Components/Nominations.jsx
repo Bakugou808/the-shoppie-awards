@@ -26,9 +26,15 @@ const Nominations = ({ nominees, handleRemoveNominee }) => {
   return (
     <div id="nominations-cont">
       <h2 className="title is-3">Nominees</h2>
-      <p className="subtitle is-6 pointer" onClick={toggleNominees}>
-        (click to hide nominees)
-      </p>
+      {toggle ? (
+        <p className="subtitle is-6 pointer" onClick={toggleNominees}>
+          (click to hide nominees)
+        </p>
+      ) : (
+        <p className="subtitle is-6 pointer" onClick={toggleNominees}>
+          (click to show nominees)
+        </p>
+      )}
 
       {toggle && (
         <div id="nominations-section">{nominees && renderNominees()}</div>
