@@ -12,6 +12,7 @@ const SearchResults = (props) => {
           key={`${i}${movie.imdbID}`}
           handleClick={handleAddNominee}
           movieData={movie}
+          btnText="Nominate This Film!"
         />
       );
     });

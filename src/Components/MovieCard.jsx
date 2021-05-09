@@ -1,6 +1,6 @@
 import React from "react";
 
-const MovieCard = ({ movieData, handleClick }) => {
+const MovieCard = ({ movieData, handleClick, btnText }) => {
   return (
     <div className="card card-width">
       <div className="card-image poster-container">
@@ -24,7 +24,7 @@ const MovieCard = ({ movieData, handleClick }) => {
             className="button is-primary"
             onClick={() => handleClick(movieData)}
           >
-            Nominate This Film!
+            {btnText}
           </button>
         </div>
       </div>

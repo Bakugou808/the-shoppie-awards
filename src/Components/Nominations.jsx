@@ -13,7 +13,11 @@ const Nominations = ({ nominees, handleRemoveNominee }) => {
       return (
         <div>
           <p>Nominated</p>
-          <MovieCard handleClick={handleRemoveNominee} movieData={nominee} />
+          <MovieCard
+            handleClick={handleRemoveNominee}
+            movieData={nominee}
+            btnText="Remove Film From Nominees."
+          />
         </div>
       );
     });
