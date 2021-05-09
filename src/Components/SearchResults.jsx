@@ -5,7 +5,6 @@ const SearchResults = (props) => {
   const { results, handleAddNominee, error, searchParams } = props;
 
   const renderResults = () => {
-    console.log(results);
     return results.map((movie, i) => {
       return (
         <MovieCard
